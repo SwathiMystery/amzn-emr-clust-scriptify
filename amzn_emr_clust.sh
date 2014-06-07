@@ -1,11 +1,11 @@
 #!/bin/bash
 # Launch cluster and add step and terminate it when in waiting state.
 
-# No. of slave nodes
+# No. of slave nodes - CR
 COUNT="3"
-# s3 bucket log folder
+# s3 bucket log folder - CR
 LOG_URI="s3://anon-logs/emr/"
-# Cluster Name
+# Cluster Name  - CR
 CLUSTER_NAME="Simpsons"
 
 JOBFLOW_ID=`/usr/bin/ruby /home/ubuntu/elastic-mapreduce-cli/elastic-mapreduce --create --alive --name $CLUSTER_NAME \
@@ -25,6 +25,7 @@ done
 echo "Cluster Setup Done. Now in WAITING state ..."
 
 echo "Launching Job..."
+# Launch your job from EMR CLI - CR
 /usr/bin/ruby /home/ubuntu/elastic-mapreduce-cli/elastic-mapreduce  -j $JOBFLOW_ID \
 		--jar s3://anon-emr/jars/anon-0.0.1.jar \
 		        --main-class com.anon.stuffs.MainClass  \
